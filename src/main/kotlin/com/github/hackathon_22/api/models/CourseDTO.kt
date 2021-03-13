@@ -9,7 +9,7 @@ data class CourseDTO(
         val fullDescription: String? = null,
         val imgUrl: String? = null,
         val tags: List<String>,
-        val isSubscribed: Boolean
+        val subscribed: Boolean
 )
 
 fun fromCourse(course: Course): CourseDTO =
@@ -20,5 +20,5 @@ fun fromCourse(course: Course): CourseDTO =
                 fullDescription = course.fullDescription,
                 imgUrl = course.imgUrl,
                 tags = course.tags?.split(", ") ?: emptyList(),
-                isSubscribed = course.isSubscribed
+                subscribed = course.subscribed
         )

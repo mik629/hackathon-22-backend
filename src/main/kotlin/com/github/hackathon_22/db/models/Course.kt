@@ -18,7 +18,7 @@ data class Course(
         @DatabaseField
         val tags: String? = "",
         @DatabaseField
-        val isSubscribed: Boolean = false
+        val subscribed: Boolean = false
 ) {
         constructor() : this(title = "")
 }

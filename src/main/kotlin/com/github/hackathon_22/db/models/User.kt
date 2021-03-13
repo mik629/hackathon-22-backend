@@ -15,14 +15,14 @@ data class User(
         @DatabaseField
         val name: String,
         @DatabaseField
-        val isMentor: Boolean
+        val mentor: Boolean
 ) {
-    constructor() : this(id = 0, username = "", pwd = "", name = "", isMentor = false)
+        constructor() : this(id = 0, username = "", pwd = "", name = "", mentor = false)
 }
 
 fun User.toUserProfileDTO(): UserProfileDTO =
         UserProfileDTO(
                 username = username,
                 name = name,
-                isMentor = isMentor
+                mentor = mentor
         )

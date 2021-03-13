@@ -1,14 +1,14 @@
 package com.github.hackathon_22
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.hackathon_22.db.dao.AuthInfoDao
 import com.github.hackathon_22.db.dao.CoursesDao
+import com.github.hackathon_22.db.dao.LecturesDao
 import com.github.hackathon_22.db.dao.UsersDao
-import com.github.hackathon_22.db.models.AuthInfo
-import com.github.hackathon_22.db.models.Course
-import com.github.hackathon_22.db.models.User
-import com.github.hackathon_22.db.models.UsersCourses
+import com.github.hackathon_22.db.models.*
 import com.github.hackathon_22.services.CoursesService
+import com.github.hackathon_22.services.LecturesService
 import com.github.hackathon_22.services.LoginService
 import com.github.hackathon_22.services.RegisterService
 import com.j256.ormlite.dao.Dao
@@ -42,6 +42,12 @@ class WinnerAppConfig {
             )
 
     @Bean
+    fun lecturesDao(): LecturesDao =
+            LecturesDao(
+                    delegateDao = createDao(clazz = Lecture::class.java)
+            )
+
+    @Bean
     fun loginService(
             userDAO: UsersDao,
             authInfoDao: AuthInfoDao
@@ -64,6 +70,14 @@ class WinnerAppConfig {
                     )
             )
 
+    @Bean
+    fun lecturesService(
+            lecturesDao: LecturesDao
+    ): LecturesService =
+            LecturesService(
+                    lecturesDao = lecturesDao
+            )
+
     private fun <T, I> createDao(clazz: Class<T>): Dao<T, I> {
         val connectionSource = JdbcConnectionSource(url)
         val orm: Dao<T, I> = DaoManager.createDao(
@@ -75,6 +89,6 @@ class WinnerAppConfig {
     }
 
     companion object {
-        val objectMapper: ObjectMapper = ObjectMapper()
+        val objectMapper: ObjectMapper = jacksonObjectMapper()
     }
 }

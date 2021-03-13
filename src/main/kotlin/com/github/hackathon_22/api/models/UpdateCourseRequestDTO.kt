@@ -9,7 +9,7 @@ data class UpdateCourseRequestDTO(
         val fullDescription: String? = null,
         val imgUrl: String? = null,
         val tags: List<String>,
-        val isSubscribed: Boolean = false
+        val subscribed: Boolean = false
 )
 
 fun UpdateCourseRequestDTO.toCourse(): Course =
@@ -20,5 +20,5 @@ fun UpdateCourseRequestDTO.toCourse(): Course =
                 fullDescription = fullDescription,
                 imgUrl = imgUrl,
                 tags = tags.joinToString(),
-                isSubscribed = isSubscribed
+                subscribed = subscribed
         )

@@ -12,10 +12,10 @@ class RegisterService(
         @Autowired val userDAO: UsersDao,
         @Autowired val authInfoDao: AuthInfoDao
 ) {
-    fun register(username: String, pwd: String, name: String, isMentor: Boolean): LoginResult {
+    fun register(username: String, pwd: String, name: String, mentor: Boolean): LoginResult {
         val existingUser = userDAO.findBy(username = username)
         if (existingUser == null) {
-            val user = User(username = username, pwd = pwd, name = name, isMentor = isMentor)
+            val user = User(username = username, pwd = pwd, name = name, mentor = mentor)
             userDAO.save(user = user)
             val token = generateToken()
             authInfoDao.save(authInfo = AuthInfo(token = token, userId = user.id))

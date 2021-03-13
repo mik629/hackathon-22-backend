@@ -14,10 +14,10 @@ class CoursesDao(
         } else {
             coursesDelegateDAO.create(course)
         }
-        return course
+        return findById(course.id!!)
     }
 
-    fun findById(id: Long): Course =
+    private fun findById(id: Long): Course =
             coursesDelegateDAO.queryForId(id)
 
     fun getAll(): List<Course> =

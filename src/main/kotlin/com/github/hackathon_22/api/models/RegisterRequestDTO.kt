@@ -4,5 +4,5 @@ data class RegisterRequestDTO(
         val username: String,
         val pwd: String,
         val name: String,
-        val isMentor: Boolean
+        val mentor: Boolean
 )
