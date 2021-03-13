@@ -1,5 +1,6 @@
 package com.github.hackathon_22
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.hackathon_22.db.dao.AuthInfoDao
 import com.github.hackathon_22.db.dao.UserDAO
 import com.github.hackathon_22.db.models.AuthInfo
@@ -18,6 +19,10 @@ import org.springframework.context.annotation.Configuration
 class WinnerAppConfig {
     @Value(value = "\${sqlite.backend.url}")
     lateinit var url: String
+
+    @Bean
+    fun objectMapper(): ObjectMapper =
+            ObjectMapper()
 
     @Bean
     fun userDao(): UserDAO =
@@ -51,5 +56,9 @@ class WinnerAppConfig {
         )
         TableUtils.createTableIfNotExists(connectionSource, clazz)
         return articleORM
+    }
+
+    companion object {
+        val objectMapper: ObjectMapper = ObjectMapper()
     }
 }
