@@ -5,10 +5,10 @@ import com.github.hackathon_22.db.models.Course
 import org.springframework.beans.factory.annotation.Autowired
 
 class CoursesService(
-        @Autowired val coursesDao: CoursesDao
+        @Autowired val coursesDao: CoursesDao,
 ) {
-    fun save(course: Course): Course =
-            coursesDao.save(course)
+    fun save(userId: Long, course: Course): Course =
+            coursesDao.save(userId = userId, course = course)
 
     fun getAllCourses(): List<Course> =
             coursesDao.getAll()

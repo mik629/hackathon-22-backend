@@ -22,8 +22,12 @@ class CoursesController(
             @RequestHeader(TOKEN_HEADER, required = false) token: String?,
             @RequestBody updateCourseRequestDTO: UpdateCourseRequestDTO
     ): CourseDTO {
-        if (token != null && loginService.getAuthInfo(token) != null) {
-            return fromCourse(coursesService.save(updateCourseRequestDTO.toCourse()))
+        if (token == null) {
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+        }
+        val authInfo = loginService.getAuthInfo(token)
+        if (authInfo != null) {
+            return fromCourse(coursesService.save(userId = authInfo.userId, course = updateCourseRequestDTO.toCourse()))
         } else {
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
         }

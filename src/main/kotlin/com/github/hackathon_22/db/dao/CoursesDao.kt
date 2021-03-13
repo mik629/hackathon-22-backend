@@ -8,11 +8,18 @@ class CoursesDao(
         private val coursesDelegateDAO: Dao<Course, Long>,
         private val userCoursesDelegateDao: Dao<UsersCourses, Long>
 ) {
-    fun save(course: Course): Course {
+    fun save(userId: Long, course: Course): Course {
         if (course.id != null) {
             coursesDelegateDAO.update(course)
         } else {
             coursesDelegateDAO.create(course)
+        }
+        if (course.subscribed) {
+            userCoursesDelegateDao.create(
+                    UsersCourses(
+                            userId = userId, courseId = course.id!!
+                    )
+            )
         }
         return findById(course.id!!)
     }
