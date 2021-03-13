@@ -23,4 +23,6 @@ data class Lecture(
         val tags: String,
         @DatabaseField
         val courseId: Long
-)
+) {
+        constructor() : this(title = "", additionalMaterials = "", tags = "", courseId = 0)
+}

@@ -17,6 +17,7 @@ data class UpdateLectureRequestDTO(
 
 fun UpdateLectureRequestDTO.toLecture(): Lecture =
         Lecture(
+                id = id,
                 title = title,
                 youtubeUrl = youtubeUrl,
                 githubRepoUrl = githubRepoUrl,

@@ -3,7 +3,7 @@ package com.github.hackathon_22.db.dao
 import com.github.hackathon_22.db.models.User
 import com.j256.ormlite.dao.Dao
 
-class UserDAO(
+class UsersDao(
         private val delegateDAO: Dao<User, Long>
 ) {
     fun findBy(username: String): User? =

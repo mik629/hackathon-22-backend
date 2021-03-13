@@ -1,13 +1,13 @@
 package com.github.hackathon_22.services
 
 import com.github.hackathon_22.db.dao.AuthInfoDao
-import com.github.hackathon_22.db.dao.UserDAO
+import com.github.hackathon_22.db.dao.UsersDao
 import com.github.hackathon_22.db.models.AuthInfo
 import com.github.hackathon_22.services.models.LoginResult
 import org.springframework.beans.factory.annotation.Autowired
 
 class LoginService(
-        @Autowired val userDAO: UserDAO,
+        @Autowired val userDAO: UsersDao,
         @Autowired val authInfoDao: AuthInfoDao
 ) {
     fun login(username: String, pwd: String): LoginResult {
@@ -27,6 +27,6 @@ class LoginService(
         )
     }
 
-    fun isLoggedIn(token: String): Boolean =
-            authInfoDao.findBy(token = token) != null
+    fun getAuthInfo(token: String): AuthInfo? =
+            authInfoDao.findBy(token = token)
 }

@@ -14,6 +14,7 @@ data class UpdateCourseRequestDTO(
 
 fun UpdateCourseRequestDTO.toCourse(): Course =
         Course(
+                id = id,
                 title = title,
                 shortDescription = shortDescription,
                 fullDescription = fullDescription,
