@@ -24,11 +24,11 @@ class LoginController(
         val loginResult = loginService.login(username = loginRequest.username, pwd = loginRequest.pwd)
         if (loginResult.success) {
             return LoginResponseDTO(
-                    userProfile = loginResult.user.toUserProfileDTO(),
+                    userProfile = loginResult.user!!.toUserProfileDTO(),
                     token = loginResult.token
             )
         } else {
-            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST)
         }
     }
 }

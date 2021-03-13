@@ -12,12 +12,12 @@ class LoginService(
 ) {
     fun login(username: String, pwd: String): LoginResult {
         val user = userDAO.findBy(username = username)
-        val success = user.pwd == pwd
+        val success = user?.pwd == pwd
         var token = ""
         if (success) {
             token = generateToken()
             authInfoDao.save(
-                    AuthInfo(token = token, userId = user.id)
+                    AuthInfo(token = token, userId = user!!.id)
             )
         }
         return LoginResult(
