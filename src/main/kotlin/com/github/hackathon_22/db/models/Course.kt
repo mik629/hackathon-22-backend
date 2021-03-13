@@ -16,9 +16,9 @@ data class Course(
         @DatabaseField
         val imgUrl: String? = null,
         @DatabaseField
-        val tags: String? = "",
+        val tags: String? = null,
         @DatabaseField
-        val subscribed: Boolean = false
+        val subscribed: Boolean
 ) {
-        constructor() : this(title = "")
+        constructor() : this(title = "", subscribed = false)
 }

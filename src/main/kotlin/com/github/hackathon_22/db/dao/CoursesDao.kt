@@ -36,6 +36,8 @@ class CoursesDao(
         return coursesDelegateDAO.queryBuilder()
                 .where()
                 .`in`("id", courseIds)
+                .and()
+                .eq("subscribed", true)
                 .query()
     }
 }
