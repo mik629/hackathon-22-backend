@@ -22,10 +22,10 @@ class CoursesController(
             @RequestHeader(TOKEN_HEADER, required = false) token: String?,
             @RequestBody updateCourseRequestDTO: UpdateCourseRequestDTO
     ): CourseDTO {
-        if (loginService.getAuthInfo(token!!) != null) {
+        if (token != null && loginService.getAuthInfo(token) != null) {
             return fromCourse(coursesService.save(updateCourseRequestDTO.toCourse()))
         } else {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN)
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
         }
     }
 
@@ -34,11 +34,11 @@ class CoursesController(
     fun getAllCourses(
             @RequestHeader(TOKEN_HEADER, required = false) token: String?
     ): List<CourseDTO> {
-        if (loginService.getAuthInfo(token!!) != null) {
+        if (token != null && loginService.getAuthInfo(token) != null) {
             return coursesService.getAllCourses()
                     .map { course -> fromCourse(course = course) }
         } else {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN)
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
         }
     }
 
@@ -47,12 +47,15 @@ class CoursesController(
     fun getFavoriteCourses(
             @RequestHeader(TOKEN_HEADER, required = false) token: String?
     ): List<CourseDTO> {
-        val authInfo = loginService.getAuthInfo(token!!)
+        if (token == null) {
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+        }
+        val authInfo = loginService.getAuthInfo(token)
         if (authInfo != null) {
             return coursesService.getFavoriteCourses(userId = authInfo.userId)
                     .map { course -> fromCourse(course = course) }
         } else {
-            throw ResponseStatusException(HttpStatus.FORBIDDEN)
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
         }
     }
 
