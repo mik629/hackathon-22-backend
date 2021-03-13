@@ -35,7 +35,7 @@ class CoursesDao(
                 .map { usersCourses -> usersCourses.courseId }
         return coursesDelegateDAO.queryBuilder()
                 .where()
-                .`in`("courseId", courseIds)
+                .`in`("id", courseIds)
                 .query()
     }
 }
