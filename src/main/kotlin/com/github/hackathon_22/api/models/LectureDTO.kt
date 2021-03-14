@@ -13,7 +13,8 @@ data class LectureDTO(
         val additionalMaterials: List<AdditionalMaterialDTO>,
         val imgUrl: String? = null,
         val tags: List<String>,
-        val courseId: Long
+        val courseId: Long,
+        val startTimestamp: Long
 )
 
 fun fromLecture(lecture: Lecture): LectureDTO {
@@ -27,6 +28,7 @@ fun fromLecture(lecture: Lecture): LectureDTO {
             additionalMaterials = additionalMaterials,
             imgUrl = lecture.imgUrl,
             tags = lecture.tags.split(", "),
-            courseId = lecture.courseId
+            courseId = lecture.courseId,
+            startTimestamp = lecture.startTimestamp
     )
 }
