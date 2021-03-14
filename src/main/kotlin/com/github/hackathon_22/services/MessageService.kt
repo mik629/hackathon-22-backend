@@ -17,7 +17,6 @@ class MessageService(
                             .setNotification(
                                     Notification.builder()
                                             .setTitle(lecture.title)
-//                                            .setBody(lecture.youtubeUrl)
                                             .build()
                             )
                             .putData("click_action", "https://www.bestapp/show?courseId=${lecture.courseId}&lectureId=${lecture.id}")

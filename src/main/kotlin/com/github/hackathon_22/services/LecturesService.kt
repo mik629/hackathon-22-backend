@@ -17,7 +17,7 @@ class LecturesService(
         return lecture
     }
 
-    fun getById(id: Long): Lecture =
+    fun getById(id: Long): Lecture? =
             lecturesDao.findById(id)
 
     fun getAll(): List<Lecture> =

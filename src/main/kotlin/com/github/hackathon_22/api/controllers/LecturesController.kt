@@ -52,7 +52,12 @@ class LecturesController(
             @RequestParam lectureId: Long
     ): LectureDTO {
         if (token != null && loginService.getAuthInfo(token) != null) {
-            return fromLecture(lecturesService.getById(id = lectureId))
+            val lecture = lecturesService.getById(id = lectureId)
+            if (lecture != null) {
+                return fromLecture(lecture)
+            } else {
+                throw ResponseStatusException(HttpStatus.NOT_FOUND)
+            }
         } else {
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
         }

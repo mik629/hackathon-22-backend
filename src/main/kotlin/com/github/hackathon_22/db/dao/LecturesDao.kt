@@ -12,10 +12,10 @@ class LecturesDao(
         } else {
             delegateDao.create(lecture)
         }
-        return findById(id = lecture.id!!)
+        return findById(id = lecture.id!!)!!
     }
 
-    fun findById(id: Long): Lecture =
+    fun findById(id: Long): Lecture? =
             delegateDao.queryForId(id)
 
     fun getAll(): List<Lecture> =
