@@ -10,6 +10,8 @@ data class AuthInfo(
         @DatabaseField
         val token: String,
         @DatabaseField
+        val fcmToken: String? = null,
+        @DatabaseField
         val userId: Long
 ) {
         constructor() : this(token = "", userId = 0)

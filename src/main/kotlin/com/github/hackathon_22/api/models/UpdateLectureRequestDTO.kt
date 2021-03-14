@@ -12,7 +12,8 @@ data class UpdateLectureRequestDTO(
         val additionalMaterials: List<AdditionalMaterialDTO>,
         val imgUrl: String? = null,
         val tags: List<String>,
-        val courseId: Long
+        val courseId: Long,
+        val startTimeStamp: Long
 )
 
 fun UpdateLectureRequestDTO.toLecture(): Lecture =
@@ -25,5 +26,6 @@ fun UpdateLectureRequestDTO.toLecture(): Lecture =
                 additionalMaterials = WinnerAppConfig.objectMapper.writeValueAsString(additionalMaterials),
                 imgUrl = imgUrl,
                 tags = tags.joinToString(),
-                courseId = courseId
+                courseId = courseId,
+                startTimestamp = startTimeStamp
         )

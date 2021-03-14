@@ -22,7 +22,11 @@ class LecturesController(
             @RequestHeader(CoursesController.TOKEN_HEADER, required = false) token: String?,
             @RequestBody updateLectureRequestDTO: UpdateLectureRequestDTO
     ): LectureDTO {
-        if (token != null && loginService.getAuthInfo(token) != null) {
+        if (token == null) {
+            throw throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+        }
+        val authInfo = loginService.getAuthInfo(token)
+        if (authInfo != null) {
             return fromLecture(lecturesService.save(lecture = updateLectureRequestDTO.toLecture()))
         } else {
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED)

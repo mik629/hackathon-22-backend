@@ -16,7 +16,18 @@ class AuthInfoDao(
     }
 
 
+    fun findFcmTokens(userIds: List<Long>): List<String?> =
+            delegateDAO.queryBuilder()
+                    .where()
+                    .`in`("userId", userIds)
+                    .query()
+                    .map { it.fcmToken }
+
     fun save(authInfo: AuthInfo) {
-        delegateDAO.create(authInfo)
+        if (delegateDAO.queryForEq("token", authInfo.token) != null) {
+            delegateDAO.update(authInfo)
+        } else {
+            delegateDAO.create(authInfo)
+        }
     }
 }

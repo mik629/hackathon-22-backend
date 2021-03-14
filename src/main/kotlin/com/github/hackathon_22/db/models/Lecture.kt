@@ -22,7 +22,9 @@ data class Lecture(
         @DatabaseField
         val tags: String,
         @DatabaseField
-        val courseId: Long
+        val courseId: Long,
+        @DatabaseField
+        val startTimestamp: Long
 ) {
-        constructor() : this(title = "", additionalMaterials = "", tags = "", courseId = 0)
+    constructor() : this(title = "", additionalMaterials = "", tags = "", courseId = 0, startTimestamp = 0)
 }

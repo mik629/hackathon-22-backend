@@ -29,4 +29,14 @@ class LoginService(
 
     fun getAuthInfo(token: String): AuthInfo? =
             authInfoDao.findBy(token = token)
+
+    fun updateAuthInfo(token: String, fcmToken: String, userId: Long) {
+        authInfoDao.save(
+                AuthInfo(
+                        token = token,
+                        fcmToken = fcmToken,
+                        userId = userId
+                )
+        )
+    }
 }
