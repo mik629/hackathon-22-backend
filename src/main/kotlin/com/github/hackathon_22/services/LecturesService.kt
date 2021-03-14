@@ -25,7 +25,7 @@ class LecturesService(
         val lectureToTokens = HashMap<Lecture, List<String?>>()
         for (lecture in getAll()) {
             val timeDiff = lecture.startTimestamp - System.currentTimeMillis()
-            if (timeDiff > 0 && timeDiff < TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)) {
+            if (timeDiff > 0 && timeDiff < TimeUnit.MILLISECONDS.convert(15, TimeUnit.MINUTES)) {
                 val userIds = usersCoursesDao.findUserIds(courseId = lecture.courseId)
                 lectureToTokens[lecture] = authInfoDao.findFcmTokens(userIds)
             }

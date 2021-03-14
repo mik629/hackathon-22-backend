@@ -11,7 +11,7 @@ class ScheduledNotificationsService(
 ) {
     //    @Scheduled(cron = "0 0 10 * * *")
 //    @Scheduled(cron = "0 */1 * * * *")
-    @Scheduled(cron = "0 0 * * * *") // hourly
+    @Scheduled(cron = "0 */15 * * * *") // hourly
     fun sendNotificationsIfNeeded() {
         for ((lecture, tokens) in lecturesService.findFcmTokensToBeNotified()) {
             messageService.sendNotifications(lecture = lecture, fcmTokens = tokens)
