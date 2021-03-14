@@ -6,14 +6,8 @@ import com.j256.ormlite.dao.Dao
 class AuthInfoDao(
         private val delegateDAO: Dao<AuthInfo, String>
 ) {
-    fun findBy(token: String): AuthInfo? {
-        val infos = delegateDAO.queryForEq("token", token)
-        return if (infos.isNotEmpty()) {
-            infos.first()
-        } else {
-            null
-        }
-    }
+    fun findBy(token: String): AuthInfo? =
+            delegateDAO.queryForId(token)
 
 
     fun findFcmTokens(userIds: List<Long>): List<String?> =
@@ -24,7 +18,7 @@ class AuthInfoDao(
                     .map { it.fcmToken }
 
     fun save(authInfo: AuthInfo) {
-        if (delegateDAO.queryForEq("token", authInfo.token) != null) {
+        if (delegateDAO.queryForId(authInfo.token) != null) {
             delegateDAO.update(authInfo)
         } else {
             delegateDAO.create(authInfo)

@@ -5,9 +5,7 @@ import com.j256.ormlite.table.DatabaseTable
 
 @DatabaseTable
 data class AuthInfo(
-        @DatabaseField(generatedId = true)
-        val id: Long? = null,
-        @DatabaseField
+        @DatabaseField(id = true)
         val token: String,
         @DatabaseField
         val fcmToken: String? = null,
