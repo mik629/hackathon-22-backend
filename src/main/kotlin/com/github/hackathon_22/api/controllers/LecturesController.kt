@@ -45,4 +45,17 @@ class LecturesController(
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
         }
     }
+
+    @GetMapping("by-id")
+    fun getLectureById(
+            @RequestHeader(CoursesController.TOKEN_HEADER, required = false) token: String?,
+            @RequestParam lectureId: Long
+    ): LectureDTO {
+        if (token != null && loginService.getAuthInfo(token) != null) {
+            return fromLecture(lecturesService.getById(id = lectureId))
+        } else {
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED)
+        }
+    }
+
 }

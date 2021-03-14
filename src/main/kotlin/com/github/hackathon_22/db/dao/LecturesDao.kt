@@ -15,7 +15,7 @@ class LecturesDao(
         return findById(id = lecture.id!!)
     }
 
-    private fun findById(id: Long): Lecture =
+    fun findById(id: Long): Lecture =
             delegateDao.queryForId(id)
 
     fun getAll(): List<Lecture> =
